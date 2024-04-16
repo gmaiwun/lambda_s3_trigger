@@ -1,0 +1,22 @@
+1 - List of Services you may use
+===============================
+
+AWS Lambda:You would use Lambda to create a serverless function that automatically uploads CSV data from S3 to the MySQL database on RDS whenever a new CSV file is added to the S3 bucket. Lambda allows you to run code without provisioning or managing servers, making it ideal for event-driven, scalable tasks like this.
+
+Amazon S3: S3 is used to store the CSV files. When a new CSV file is uploaded to the S3 bucket, it triggers the Lambda function to process the file and upload its contents to the database. S3 provides durable, scalable, and secure object storage.
+
+AWS Secrets Manager: You would store the database credentials securely in Secrets Manager. Lambda retrieves these credentials from Secrets Manager to connect to the MySQL database hosted on RDS securely. Secrets Manager helps you protect sensitive information and access it securely from your applications.
+
+Amazon RDS (MySQL): RDS is used to host the MySQL database. The Lambda function connects to the MySQL database to insert the CSV data. RDS manages administrative tasks such as hardware provisioning, database setup, patching, and backups, allowing you to focus on your application.
+
+Amazon EC2:  If you need to perform tasks such as querying the database, reading data from tables, or performing administrative tasks that require direct access to the MySQL database, you can use EC2 instances. EC2 provides scalable compute capacity in the cloud and allows you to run applications on virtual servers.
+
+Amazon VPC: You would use VPC to create a virtual network for your AWS resources. Both the RDS instance and the EC2 instance should be placed within the same VPC to facilitate communication between them securely. VPC provides network isolation, security, and control over your AWS environment.
+
+IAM (Identity and Access Management): IAM is used to define roles and permissions for the Lambda function, EC2 instances, and other AWS resources. You would create IAM roles with the necessary permissions to access S3, Secrets Manager, RDS, and other AWS services securely.
+
+Amazon CloudWatch: CloudWatch is used for monitoring and logging. You can use CloudWatch Logs to monitor the execution of your Lambda function and log any errors or informational messages. CloudWatch Metrics can be used to track Lambda function invocations, durations, and errors for monitoring and troubleshooting.
+
+AWS Secrets Manager Endpoint:  If your Lambda function needs to retrieve database credentials securely from AWS Secrets Manager and is running within a VPC, you can use a VPC endpoint for Secrets Manager. This allows your Lambda function to access Secrets Manager directly from within your VPC without needing to traverse the public internet. It enhances security by keeping traffic within your private network and eliminates the need for internet gateway or NAT gateway for accessing Secrets Manager.
+
+S3 Endpoint: Although not explicitly mentioned in your use case, if your Lambda function needs to access S3 to read CSV files, you could use a VPC endpoint for S3. This allows your Lambda function to access S3 directly from within your VPC without going through the public internet. It can help improve performance and security by keeping traffic within your private network and reducing the attack surface.
