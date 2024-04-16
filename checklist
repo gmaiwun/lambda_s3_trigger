@@ -1,0 +1,10 @@
+## *A checklist that could be useful*
+
+- [ ]  Create a Lambda function that listens for the creation of a .csv file in an S3 bucket and uploads the content of the file into an RDS Mysql database.
+- [ ]  Ensure the database credentials are not hard-coded into the Lambda function.
+- [ ]  Make sure the database is publicly accessible.
+- [ ]  Download, zip and copy the pymysql code to S3.
+- [ ]  Write Lambda function code using environment variables (OPTION A).
+- [ ]  Write Lambda function code using Secrets Manager (OPTION B).
+- [ ]  Create a MySQL table for the exercise.
+- [ ]  Set up role permission policies for the project.
