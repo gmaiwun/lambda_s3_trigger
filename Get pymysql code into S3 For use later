@@ -1,0 +1,36 @@
+In this case, i am using an EC2 instance to download, zip and copy the code to s3. In the process, i’m am also using awscli with programmatic access setup to enable the copy to s3
+========================================================================================================================================================================================
+
+#Update your instance:
+sudo apt update
+sudo apt upgrade
+
+#Install Python:
+sudo apt install python3
+
+#Install pip for Python package management:
+sudo apt install python3-pip
+
+#Install pymysql:
+sudo pip3 install pymysql
+
+#Create a directory for your Lambda function code:
+mkdir lambda_function
+
+#Navigate to the directory:
+cd lambda_function
+
+#Copy the pymysql library files to your Lambda function directory:
+cp -r /usr/lib/python3/dist-packages/pymysql .
+
+#Navigate to the parent directory of lambda_function and use the following command to zip the directory:
+zip -r pymysql.zip pymysql
+
+#You can use the AWS CLI to upload the ZIP file to an S3 bucket. First, install the AWS CLI if you haven't already:
+sudo apt install awscli
+
+#Then, configure the AWS CLI with your AWS credentials:
+aws configure
+
+#Finally, upload the ZIP file to your desired S3 bucket:
+aws s3 cp pymysql.zip s3://your-bucket-name/path/to/pymysql.zip
